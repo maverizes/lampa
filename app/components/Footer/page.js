@@ -109,7 +109,7 @@ export default function Footer() {
                 Услуги
               </Link>
               <Link
-                href="/where-to-buy"
+                href="/WhereToBuyPage"
                 className="text-xs text-gray-400 hover:text-white transition-colors"
               >
                 Где купить?
@@ -194,7 +194,7 @@ export default function Footer() {
                   Оплата и доставка
                 </Link>
                 <Link
-                  href="/warranty"
+                  href="/garantiya-i-servis"
                   className="text-xs text-gray-400 hover:text-white transition-colors"
                 >
                   Гарантия и сервис

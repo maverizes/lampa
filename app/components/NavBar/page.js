@@ -99,9 +99,9 @@ export default function NavBar() {
 
         <nav className={styles.navigation}>
           <Link href="/catalog">Каталог</Link>
-          <Link href="/about">О компании</Link>
+          <Link href="/AboutPage">О компании</Link>
           <Link href="/portfolio">Портфолио</Link>
-          <Link href="/where-to-buy">Где купить?</Link>
+          <Link href="/WhereToBuyPage">Где купить?</Link>
           <Link href="/new">Новости</Link>
           <Link href="/contacts">Контакты</Link>
         </nav>

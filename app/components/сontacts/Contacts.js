@@ -88,7 +88,7 @@ export default function ContactsPage() {
       <div className="w-full h-[500px] md:h-[600px] bg-gray-100 border-t border-gray-200 relative overflow-hidden">
         <iframe
           title="Карта проезда"
-          src="https://yandex.ru/map-widget/v1/?ll=37.608000%2C55.708000&z=12&pt=37.608000,55.708000,pm2rdm"
+          src="https://yandex.ru/map-widget/v1/?ll=69.2401%2C41.2995&z=12&pt=69.2401,41.2995,pm2rdm"
           className="w-full h-full border-0"
           allowFullScreen={true}
           loading="lazy"

@@ -1,10 +1,10 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useInView } from "framer-motion";
 
-// Импортируем новое фото для 2-го слайда
+// Импортируем фото для 2-го слайда
 import LampaVerh from "../../../public/lampaVerh.png";
 
 const SLIDES = [
@@ -19,7 +19,6 @@ const SLIDES = [
     ),
     description:
       "Светильник OFL DROP имеет изящную каплевидную форму и также обладает рядом интересных технических особенностей, выгодно отличающих его от конкурентов.",
-    // 1-й слайд: предыдущее фото
     image: "/lampa.png",
     link: "#details-1",
   },
@@ -34,7 +33,6 @@ const SLIDES = [
     ),
     description:
       "Минималистичные линейные светильники для создания мягкого и равномерного общего освещения в современных интерьерах.",
-    // 2-й слайд: новое фото
     image: LampaVerh,
     link: "#details-2",
   },
@@ -62,6 +60,10 @@ export default function Hero() {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
 
+  // Реф для отслеживания появления секции на экране при скролле
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
   const currentIndex = Math.abs(page % SLIDES.length);
   const currentSlide = SLIDES[currentIndex];
 
@@ -72,8 +74,16 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative w-full min-h-[500px] bg-white py-16 px-8 md:px-16 flex items-center justify-center font-sans overflow-hidden">
-      <div className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-12 items-center relative">
+    <section
+      ref={ref}
+      className="relative w-full min-h-[500px] bg-white py-16 px-8 md:px-16 flex items-center justify-center font-sans overflow-hidden"
+    >
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+        transition={{ duration: 0.6, ease: "easeOut" }}
+        className="max-w-6xl w-full grid grid-cols-1 md:grid-cols-2 gap-12 items-center relative"
+      >
         {/* Номер слайда */}
         <AnimatePresence mode="wait">
           <motion.div
@@ -183,7 +193,7 @@ export default function Hero() {
             &#8250;
           </motion.button>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }
