@@ -1,5 +1,4 @@
 import { getRequestConfig } from 'next-intl/server';
-import { routing } from './routing'; // если есть файл routing, или можно проще через headers/cookies
 
 export default getRequestConfig(async ({ requestLocale }) => {
   // Получаем текущий язык из запроса Next.js
