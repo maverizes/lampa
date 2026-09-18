@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 // Подключаем компонент формы контактов из папки components
-import ContactForm from "../ContactForm/page";
+import ContactForm from "../ContactForm/ContactForm";
 
 export default function ContactsPage() {
   return (

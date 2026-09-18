@@ -3,8 +3,8 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import ContactsModal from "../ContactsModal/page";
-import PrivacyModal from "../PrivacyModal/page";
+import ContactsModal from "../ContactsModal/ContactsModal";
+import PrivacyModal from "../PrivacyModal/PrivacyModal";
 
 export default function Footer() {
   const [isContactsOpen, setIsContactsOpen] = useState(false);

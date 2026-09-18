@@ -1,9 +1,9 @@
 import ScrollBackground from "./components/ScrollBackground";
 import ScrollSection from "./components/ScrollSection";
-import Hero from "./components/Hero/page";
-import Ab from "./components/About/page";
-import Categories from "./components/Categories/page";
-import News from "./components/News/page";
+import Hero from "./components/Hero/Hero";
+import Ab from "./components/About/About";
+import Categories from "./components/Categories/Categories";
+import News from "./components/News/News";
 import Portfolio from "./components/Portfolio/Portfolio";
 export default function Home() {
   return (

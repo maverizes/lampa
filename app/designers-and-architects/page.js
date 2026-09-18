@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import HeroImg from "../../public/foto.png"; // Импортируем вашу картинку
-import PrivacyModal from "../components/PrivacyModal/page";
+import PrivacyModal from "../components/PrivacyModal/PrivacyModal";
 
 export default function DesignersPage() {
   const [isPrivacyOpen, setIsPrivacyOpen] = useState(false);
