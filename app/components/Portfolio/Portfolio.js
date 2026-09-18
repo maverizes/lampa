@@ -104,7 +104,7 @@ export default function Portfolio() {
             Портфолио
           </h2>
           <Link
-            href="/app/proekt/page.js"
+            href="/proekt"
             onClick={(e) => e.stopPropagation()}
             className="inline-flex items-center gap-2 text-xs font-medium text-neutral-900 hover:text-[#22c55e] transition-colors group w-fit relative z-20 cursor-pointer"
           >

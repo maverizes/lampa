@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import ContactsModal from "../ContactsModal/page";
 import PrivacyModal from "../PrivacyModal/page";
 
@@ -17,11 +18,14 @@ export default function Footer() {
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10 mb-16">
             {/* 1. Логотип и социальные сети */}
             <div className="flex flex-col space-y-6">
-              <Link
-                href="/"
-                className="text-3xl font-extrabold tracking-widest text-white"
-              >
-                HTL.
+              <Link href="/" className="inline-block relative w-36 h-10">
+                <Image
+                  src="/logoP.png"
+                  alt="HTL Logo"
+                  fill
+                  className="object-contain object-left  ml-5"
+                  priority
+                />
               </Link>
 
               <div className="flex items-center space-x-3">
@@ -91,7 +95,7 @@ export default function Footer() {
                 Клиентам
               </h4>
               <Link
-                href="/catalog"
+                href="/katolog"
                 className="text-xs text-gray-400 hover:text-white transition-colors"
               >
                 Продукция
@@ -132,12 +136,17 @@ export default function Footer() {
               >
                 Защита проекта
               </Link>
-              <Link
+
+              {/* Скачивание каталога */}
+              <a
                 href="/catalog.pdf"
-                className="text-xs text-gray-400 hover:text-white transition-colors"
+                download="catalog.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs text-gray-400 hover:text-[#22c55e] transition-colors cursor-pointer flex items-center gap-1"
               >
                 Скачать каталог
-              </Link>
+              </a>
             </div>
 
             {/* 3. О компании */}
@@ -147,7 +156,7 @@ export default function Footer() {
                   О компании
                 </h4>
                 <Link
-                  href="/portfolio"
+                  href="/proekt"
                   className="text-xs text-gray-400 hover:text-white transition-colors"
                 >
                   Портфолио
@@ -162,7 +171,7 @@ export default function Footer() {
                 {/* Кнопка открытия контактов */}
                 <button
                   onClick={() => setIsContactsOpen(true)}
-                  className="text-xs text-gray-400 hover:text-white transition-colors text-left"
+                  className="text-xs text-gray-400 hover:text-white transition-colors text-left cursor-pointer"
                 >
                   Контакты
                 </button>
@@ -188,7 +197,7 @@ export default function Footer() {
                   Помощь
                 </h4>
                 <Link
-                  href="/payment-delivery"
+                  href="/wishlist"
                   className="text-xs text-gray-400 hover:text-white transition-colors"
                 >
                   Оплата и доставка
@@ -220,7 +229,7 @@ export default function Footer() {
             {/* Кнопка открытия политики конфиденциальности */}
             <button
               onClick={() => setIsPrivacyOpen(true)}
-              className="hover:text-gray-300 transition-colors text-left"
+              className="hover:text-gray-300 transition-colors text-left cursor-pointer"
             >
               Политика конфиденциальности
             </button>

@@ -1,5 +1,6 @@
 "use client";
 
+import { h1 } from "framer-motion/client";
 import React, { useState } from "react";
 
 export default function AboutPage() {
@@ -64,7 +65,7 @@ export default function AboutPage() {
         </h1>
       </div>
 
-      {/* Большое баннер-изображение / видеоинтеграция */}
+      {/* Баннер-изображение / Видеоинтеграция */}
       <div className="relative w-full h-[350px] md:h-[480px] bg-neutral-900 overflow-hidden mb-20 flex items-center justify-center">
         {!isPlaying ? (
           <>
@@ -88,13 +89,16 @@ export default function AboutPage() {
             </button>
           </>
         ) : (
-          <iframe
-            className="w-full h-full absolute inset-0 z-20"
-            src="https://www.youtube.com/embed/_E9xgr7nK8g?autoplay=1"
-            title="Track Lighting Systems: Track Lights"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-          ></iframe>
+          // <iframe
+          //   className="w-full h-full absolute inset-0 z-20"
+          //   src="https://www.youtube.com/embed/EcjImKIe5ak?si=UXLsALygBKbt6TK_&autoplay=1"
+          //   title="YouTube video player"
+          //   frameBorder="0"
+          //   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          //   referrerPolicy="strict-origin-when-cross-origin"
+          //   allowFullScreen
+          // ></iframe>
+          <h1>2</h1>
         )}
       </div>
 

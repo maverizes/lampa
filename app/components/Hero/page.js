@@ -17,10 +17,23 @@ const SLIDES = [
         <span className="text-[#22c55e]">OFL DROP</span>
       </>
     ),
+    rawTitle: "OFL DROP",
     description:
       "Светильник OFL DROP имеет изящную каплевидную форму и также обладает рядом интересных технических особенностей, выгодно отличающих его от конкурентов.",
+    fullDetails: {
+      power: "15-24 Вт",
+      voltage: "220-240 В",
+      colorTemp: "3000K / 4000K",
+      material: "Алюминиевый сплав, акрил",
+      protection: "IP44",
+      features: [
+        "Анодированное покрытие корпуса",
+        "Высокий индекс цветопередачи CRI > 90",
+        "Плавное диммирование (TRIAC / DALI)",
+        "Гарантия 5 лет",
+      ],
+    },
     image: "/lampa.png",
-    link: "#details-1",
   },
   {
     id: "02",
@@ -31,10 +44,23 @@ const SLIDES = [
         <span className="text-[#22c55e]">OFL LINE</span>
       </>
     ),
+    rawTitle: "OFL LINE",
     description:
       "Минималистичные линейные светильники для создания мягкого и равномерного общего освещения в современных интерьерах.",
+    fullDetails: {
+      power: "30 Вт / м",
+      voltage: "24 В / 220 В",
+      colorTemp: "2700K - 5000K (Tunable White)",
+      material: "Экструдированный алюминий",
+      protection: "IP20 / IP54",
+      features: [
+        "Соединение в непрерывные линии без теневых зон",
+        "Матовый рассеиватель из PMMA",
+        "Встроенный источник питания",
+        "Низкий коэффициент пульсации < 1%",
+      ],
+    },
     image: LampaVerh,
-    link: "#details-2",
   },
 ];
 
@@ -60,7 +86,9 @@ export default function Hero() {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
 
-  // Реф для отслеживания появления секции на экране при скролле
+  // Состояния для всплывающего меню деталей
+  const [isDetailsOpen, setIsDetailsOpen] = useState(false);
+
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
@@ -160,9 +188,9 @@ export default function Hero() {
               {currentSlide.description}
             </p>
 
-            <a
-              href={currentSlide.link}
-              className="inline-flex items-center space-x-3 text-gray-800 font-medium text-sm hover:text-[#22c55e] transition-colors group"
+            <button
+              onClick={() => setIsDetailsOpen(true)}
+              className="inline-flex items-center space-x-3 text-gray-800 font-medium text-sm hover:text-[#22c55e] transition-colors group cursor-pointer"
             >
               <span className="border-b border-transparent group-hover:border-[#22c55e]">
                 Подробнее
@@ -170,7 +198,7 @@ export default function Hero() {
               <span className="w-7 h-7 rounded-full bg-[#22c55e] text-white flex items-center justify-center text-lg font-bold group-hover:scale-110 transition-transform">
                 &#8250;
               </span>
-            </a>
+            </button>
           </motion.div>
         </AnimatePresence>
 
@@ -180,7 +208,7 @@ export default function Hero() {
             whileTap={{ scale: 0.9 }}
             onClick={() => paginate(-1)}
             aria-label="Предыдущий слайд"
-            className="w-9 h-9 rounded-full border border-gray-300 text-gray-400 hover:text-gray-700 hover:border-gray-500 flex items-center justify-center text-xl transition-colors bg-white/80 backdrop-blur-sm"
+            className="w-9 h-9 rounded-full border border-gray-300 text-gray-400 hover:text-gray-700 hover:border-gray-500 flex items-center justify-center text-xl transition-colors bg-white/80 backdrop-blur-sm cursor-pointer"
           >
             &#8249;
           </motion.button>
@@ -188,12 +216,139 @@ export default function Hero() {
             whileTap={{ scale: 0.9 }}
             onClick={() => paginate(1)}
             aria-label="Следующий слайд"
-            className="w-9 h-9 rounded-full border border-gray-300 text-gray-400 hover:text-gray-700 hover:border-gray-500 flex items-center justify-center text-xl transition-colors bg-white/80 backdrop-blur-sm"
+            className="w-9 h-9 rounded-full border border-gray-300 text-gray-400 hover:text-gray-700 hover:border-gray-500 flex items-center justify-center text-xl transition-colors bg-white/80 backdrop-blur-sm cursor-pointer"
           >
             &#8250;
           </motion.button>
         </div>
       </motion.div>
+
+      {/* --- ВЫЕЗЖАЮЩЕЕ МЕНЮ ДЕТАЛЕЙ --- */}
+      <AnimatePresence>
+        {isDetailsOpen && (
+          <>
+            {/* Затемнение фона */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsDetailsOpen(false)}
+              className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 cursor-pointer"
+            />
+
+            {/* Боковая панель с деталями */}
+            <motion.div
+              initial={{ x: "100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "100%" }}
+              transition={{ type: "spring", damping: 25, stiffness: 200 }}
+              className="fixed top-0 right-0 h-full w-full max-w-md bg-white shadow-2xl z-50 p-6 sm:p-8 overflow-y-auto flex flex-col justify-between"
+            >
+              <div>
+                {/* Шапка модалки */}
+                <div className="flex items-center justify-between pb-6 border-b border-gray-100">
+                  <span className="text-xs font-semibold uppercase tracking-wider text-[#22c55e]">
+                    Детали модели /{currentSlide.id}
+                  </span>
+                  <button
+                    onClick={() => setIsDetailsOpen(false)}
+                    className="w-8 h-8 rounded-full bg-gray-100 text-gray-500 hover:bg-gray-200 flex items-center justify-center text-sm font-bold transition-colors cursor-pointer"
+                  >
+                    ✕
+                  </button>
+                </div>
+
+                {/* Название и фото */}
+                <div className="mt-6">
+                  <h3 className="text-2xl font-bold text-gray-900 uppercase">
+                    {currentSlide.rawTitle}
+                  </h3>
+                  <div className="relative w-full h-48 my-4 bg-neutral-50 rounded-xl overflow-hidden flex items-center justify-center">
+                    <Image
+                      src={currentSlide.image}
+                      alt={currentSlide.rawTitle}
+                      fill
+                      className="object-contain p-4"
+                    />
+                  </div>
+                  <p className="text-sm text-gray-600 leading-relaxed">
+                    {currentSlide.description}
+                  </p>
+                </div>
+
+                {/* Таблица технических характеристик */}
+                <div className="mt-6 space-y-3">
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-gray-400">
+                    Характеристики
+                  </h4>
+                  <div className="space-y-2 text-xs text-gray-700">
+                    <div className="flex justify-between py-1.5 border-b border-gray-100">
+                      <span className="text-gray-400">Мощность:</span>
+                      <span className="font-semibold">
+                        {currentSlide.fullDetails.power}
+                      </span>
+                    </div>
+                    <div className="flex justify-between py-1.5 border-b border-gray-100">
+                      <span className="text-gray-400">Напряжение:</span>
+                      <span className="font-semibold">
+                        {currentSlide.fullDetails.voltage}
+                      </span>
+                    </div>
+                    <div className="flex justify-between py-1.5 border-b border-gray-100">
+                      <span className="text-gray-400">
+                        Цветовая температура:
+                      </span>
+                      <span className="font-semibold">
+                        {currentSlide.fullDetails.colorTemp}
+                      </span>
+                    </div>
+                    <div className="flex justify-between py-1.5 border-b border-gray-100">
+                      <span className="text-gray-400">Материал:</span>
+                      <span className="font-semibold">
+                        {currentSlide.fullDetails.material}
+                      </span>
+                    </div>
+                    <div className="flex justify-between py-1.5 border-b border-gray-100">
+                      <span className="text-gray-400">Защита:</span>
+                      <span className="font-semibold">
+                        {currentSlide.fullDetails.protection}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Особенности */}
+                <div className="mt-6 space-y-2">
+                  <h4 className="text-xs font-bold uppercase tracking-wider text-gray-400">
+                    Особенности
+                  </h4>
+                  <ul className="space-y-1.5">
+                    {currentSlide.fullDetails.features.map((item, idx) => (
+                      <li
+                        key={idx}
+                        className="flex items-start gap-2 text-xs text-gray-600"
+                      >
+                        <span className="text-[#22c55e] font-bold">•</span>
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </div>
+
+              {/* Кнопка закрытия/заказа */}
+              <div className="pt-6 mt-6 border-t border-gray-100">
+                <button
+                  onClick={() => setIsDetailsOpen(false)}
+                  className="w-full py-3 bg-[#22c55e] hover:bg-[#16a34a] text-white font-medium text-sm rounded-xl transition-colors cursor-pointer shadow-lg shadow-green-500/20"
+                >
+                  Закрыть
+                </button>
+              </div>
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
